@@ -146,17 +146,6 @@ html(lang='en')
                 padding: 1px 4px;
             }
 
-            #items > table th:nth-child(2), #items > table th:nth-child(4) {
-                width: 45px;
-            }
-
-            #items > table th:nth-child(3) {
-                width: 60px;
-            }
-
-            #items > table th:nth-child(5) {
-                width: 80px;
-            }
 
             #items > table tr td:not(:first-child) {
                 text-align: right;
@@ -187,8 +176,8 @@ html(lang='en')
             }
 
             #summary {
-                height: 155px;
-                margin-top: 30px;
+                height: 175px;
+                margin-top: 10px;
             }
 
             #summary #note {
@@ -223,7 +212,7 @@ html(lang='en')
                 text-align: right;
             }
 
-            #summary #total table tr:nth-child(3) {
+            #summary #total table tr:nth-child(3),#summary #total table tr:nth-child(9), #summary #total table tr:nth-child(6) {
                 background: #efefef;
                 font-weight: 600;
             }
@@ -293,6 +282,7 @@ html(lang='en')
                 table(class=(loopTable === 0 ? '' : 'padding-table'))
                     tr
                         th=table_description
+                        th='Sku/Gtin'
                         th=table_tax
                         th=table_price_without_taxes_unit
                         th=table_quantity
@@ -309,6 +299,7 @@ html(lang='en')
                         - for(var row = 0; row <= rowPerPage; row++) {
                             tr
                                 td #{articles[rowCounter] && articles[rowCounter].description ? articles[rowCounter].description : ''}
+                                td #{articles[rowCounter] && articles[rowCounter].ref ? articles[rowCounter].ref : ''}
                                 td #{articles[rowCounter] && articles[rowCounter].tax ? articles[rowCounter].tax + '%': ''}
                                 td #{articles[rowCounter] && articles[rowCounter].price ? articles[rowCounter].price : ''}
                                 td #{articles[rowCounter] && articles[rowCounter].qt ? articles[rowCounter].qt : ''}
@@ -333,7 +324,26 @@ html(lang='en')
                             td=table_total_taxes
                             td=table_total_taxes_value
                         tr
-                            td=table_total_with_taxes
+                            td='Total Produits (TTC)'
                             td=table_total_with_taxes_value
+                        tr
+                            td='Frais de port (HT)'
+                            td=table_total_fdp
+                        tr
+                            td='Frais de port offert (HT)'
+                            td=table_total_fdp_offered
+                        tr
+                            td='Frais de port total (TTC)'
+                            td=table_total_fdp__all
+                        tr
+                            td='Crédit offert (TTC)'
+                            td=table_credit
+                        tr
+                            td='Coupon offert (TTC)'
+                            td=table_discount
+                        tr
+                            td=table_total_with_taxes
+                            td=table_total_with_taxes_value_with_credit
+
             #footer
                 p!=footer
