@@ -186,6 +186,8 @@ export default class Generator extends Common {
         this._checkArticle(tmp[i]);
         tmp[i].total_product_without_taxes = this.formatOutputNumber(tmp[i]
           .price * tmp[i].qt);
+        tmp[i].total_product_with_taxes = this.formatOutputNumber(tmp[i]
+          .price_ttc * tmp[i].qt);
         tmp[i].total_product_taxes = this.formatOutputNumber(this.round(tmp[i]
           .total_product_without_taxes * (tmp[i].tax / 100)));
         tmp[i].total_product_with_taxes = this.formatOutputNumber(this.round(
@@ -201,11 +203,10 @@ export default class Generator extends Common {
       this._checkArticle(tmp);
       tmp.total_product_without_taxes = this.formatOutputNumber(tmp.price *
         tmp.qt);
+       tmp.total_product_with_taxes = this.formatOutputNumber(tmp.price_ttc *
+        tmp.qt);
       tmp.total_product_taxes = this.formatOutputNumber(this.round(tmp
         .total_product_without_taxes * (tmp.tax / 100)));
-      tmp.total_product_with_taxes = this.formatOutputNumber(this.round(
-        Number(tmp.total_product_without_taxes) + Number(tmp
-          .total_product_taxes)));
       tmp.price = this.formatOutputNumber(tmp.price);
       tmp.tax = this.formatOutputNumber(tmp.tax);
       this.total_exc_taxes += Number(tmp.total_product_without_taxes);
@@ -233,13 +234,13 @@ export default class Generator extends Common {
    */
   _checkArticle(article) {
     if (!Object.prototype.hasOwnProperty.call(article, 'description'))
-    throw new Error('Description attribute is missing');
+      throw new Error('Description attribute is missing');
     if (!Object.prototype.hasOwnProperty.call(article, 'tax'))
-    throw new Error('Tax attribute is missing');
+      throw new Error('Tax attribute is missing');
     if (!this.isNumeric(article.tax)) throw new Error(
       'Tax attribute have to be a number');
     if (!Object.prototype.hasOwnProperty.call(article, 'price'))
-    throw new Error('Price attribute is missing');
+      throw new Error('Price attribute is missing');
     if (!this.isNumeric(article.price)) throw new Error(
       'Price attribute have to be a number');
     if (!Object.prototype.hasOwnProperty.call(article, 'qt')) throw new Error(
@@ -374,7 +375,8 @@ export default class Generator extends Common {
       table_total_with_taxes_value: this.formatOutputNumber(this
         .total_inc_taxes),
       table_total_with_taxes_value_with_credit: this.formatOutputNumber(this
-        .total_inc_taxes - this.discount - this.credit),
+        .total_inc_taxes - this.discount - this.credit + this.fdp - this
+        .fdpoffered),
       template_configuration: this._templateConfiguration(),
       moment: moment(),
     };
