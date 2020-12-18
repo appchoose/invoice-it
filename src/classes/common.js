@@ -56,14 +56,7 @@ export default class Common {
    * @param num
    * @return {string}
    */
-  formatOutputNumber(num) {
-    const number = num.toString();
-    if (number.includes('.')) {
-      const split = number.split('.');
-      if (split[1].length === 1) return `${split[0]}.${split[1]}0`;
-      if (split[1].length === 2) return number;
-      return `${split[0]}.${split[1][0]}${split[1][1]}`;
-    }
-    return `${number}.00`;
+  formatOutputNumber(price) {
+   return price.toFixed(2)
   }
 }
