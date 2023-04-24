@@ -333,7 +333,22 @@ html(lang='en')
                             td=table_total_taxes
                             td=table_total_taxes_value
                         tr
-                            td=table_total_with_taxes
+                            td='Total Produits (TTC)'
                             td=table_total_with_taxes_value
+                        tr
+                            td='Frais de port (HT)'
+                            td=table_total_fdp
+                        tr
+                            td='Frais de port offert (HT)'
+                            td=table_total_fdp_offered
+                        tr
+                            td='Frais de port total (TTC)'
+                            td=table_total_fdp__all
+                        tr
+                            td='Réductions (TTC)'
+                            td=table_credit
+                        tr
+                            td='TOTAL TTC'
+                            td=table_total_with_taxes_value_with_credit
             #footer
                 p!=footer

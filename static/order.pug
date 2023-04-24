@@ -282,7 +282,7 @@ html(lang='en')
                 table(class=(loopTable === 0 ? '' : 'padding-table'))
                     tr
                         th=table_description
-                        th='Sku/Gtin'
+                        //- th='Sku/Gtin'
                         th=table_tax
                         th=table_price_without_taxes_unit
                         th=table_quantity
@@ -299,7 +299,7 @@ html(lang='en')
                         - for(var row = 0; row <= rowPerPage; row++) {
                             tr
                                 td #{articles[rowCounter] && articles[rowCounter].description ? articles[rowCounter].description : ''}
-                                td #{articles[rowCounter] && articles[rowCounter].ref ? articles[rowCounter].ref : ''}
+                                //- td #{articles[rowCounter] && articles[rowCounter].ref ? articles[rowCounter].ref : ''}
                                 td #{articles[rowCounter] && articles[rowCounter].tax ? articles[rowCounter].tax + '%': ''}
                                 td #{articles[rowCounter] && articles[rowCounter].price ? articles[rowCounter].price : ''}
                                 td #{articles[rowCounter] && articles[rowCounter].qt ? articles[rowCounter].qt : ''}
@@ -326,23 +326,25 @@ html(lang='en')
                         tr
                             td='Total Produits (TTC)'
                             td=table_total_with_taxes_value
+
+                        if table_total_fdp > 0
+                            tr
+                               td='Frais de port (HT)'
+                               td=table_total_fdp
+                        if table_total_fdp_offered > 0
+                             tr
+                               td='Frais de port offert (HT)'
+                               td=table_total_fdp_offered
+                        if table_total_fdp__all > 0
+                             tr
+                               td='Frais de port total (TTC)'
+                               td=table_total_fdp__all
+                        if table_credit > 0
+                             tr
+                               td='Réductions (TTC)'
+                               td=table_credit
                         tr
-                            td='Frais de port (HT)'
-                            td=table_total_fdp
-                        tr
-                            td='Frais de port offert (HT)'
-                            td=table_total_fdp_offered
-                        tr
-                            td='Frais de port total (TTC)'
-                            td=table_total_fdp__all
-                        tr
-                            td='Crédit offert (TTC)'
-                            td=table_credit
-                        tr
-                            td='Coupon offert (TTC)'
-                            td=table_discount
-                        tr
-                            td=table_total_with_taxes
+                            td='TOTAL TTC'
                             td=table_total_with_taxes_value_with_credit
 
             #footer
