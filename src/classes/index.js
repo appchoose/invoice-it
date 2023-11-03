@@ -17,10 +17,11 @@ export default {
    * @param recipient
    * @returns {Generator}
    */
-  create: (recipient, emitter) => {
+  create: (recipient, emitter, receipt) => {
     const generator = new Generator(configuration);
     generator.recipient(recipient);
     generator.emitter(emitter);
+    generator.receipt(receipt);
     return generator;
   },
 

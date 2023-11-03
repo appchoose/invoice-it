@@ -10,7 +10,7 @@
   "invoice_header_date": "Date facturation:",
   "fromto_phone": "Tél:",
   "fromto_mail": "Email:",
-  "table_information": "Montants exprimés en Euros",
+  "table_information": "Montants exprimés",
   "table_description": "Description",
   "table_tax": "TVA",
   "table_quantity": "Qt",

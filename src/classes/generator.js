@@ -14,6 +14,8 @@ export default class Generator extends Common {
       : new Recipient();
     this._emitter = (config.emitter) ? new Emitter(config.emitter)
       : new Emitter();
+    this._receipt = (config.receipt) ? new Emitter(config.receipt)
+      : new Emitter();
     this._total_exc_taxes = 0;
     this._total_taxes = 0;
     this._total_inc_taxes = 0;
@@ -299,6 +301,11 @@ export default class Generator extends Common {
     return this._emitter.hydrate(obj, this._emitter._itemsToHydrate());
   }
 
+  receipt(obj) {
+    if (!obj) return this._receipt;
+    return this._receipt.hydrate(obj, this._receipt._itemsToHydrate());
+  }
+
   /**
    * @description Precompile translation to merging glabal with custom translations
    * @returns {{logo: *, header_date: *, table_information, table_description, table_tax, table_quantity,
@@ -367,6 +374,15 @@ export default class Generator extends Common {
       emitter_country: this.emitter().country,
       emitter_phone: this.emitter().phone,
       emitter_mail: this.emitter().mail,
+
+      receipt_name: this.receipt().name,
+      receipt_street_number: this.receipt().street_number,
+      receipt_street_name: this.receipt().street_name,
+      receipt_zip_code: this.receipt().zip_code,
+      receipt_city: this.receipt().city,
+      receipt_country: this.receipt().country,
+      receipt_phone: this.receipt().phone,
+
       recipient_company: this.recipient().company_name,
       recipient_first_name: this.recipient().first_name,
       recipient_last_name: this.recipient().last_name,
@@ -387,6 +403,9 @@ export default class Generator extends Common {
       table_tax_value: this.formatOutputNumber(this.vat_avalara),
       table_total_fdp_offered: this.formatOutputNumber(-this.fdpoffered
         / 1.2),
+
+      table_total_fdp_offered_us: this.formatOutputNumber(-this.fdpoffered),
+      table_total_fdp_us: this.formatOutputNumber(this.fdp),
       table_total_without_taxes_value: this.formatOutputNumber(this
         .total_exc_taxes),
       table_total_taxes_value: this.formatOutputNumber(this.total_taxes),
