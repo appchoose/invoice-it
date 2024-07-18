@@ -398,6 +398,7 @@ export default class Generator extends Common {
       table_discount: this.formatOutputNumber(-this.discount),
       table_total_fdp__all: this.formatOutputNumber(this.fdp - this
         .fdpoffered),
+      table_total_eee_price: this.formatOutputNumber(this.total_eee_price ?? 0),
       table_credit: this.formatOutputNumber(-this.credit),
       table_total_usa: this.formatOutputNumber(this.total_inc_taxes + this.vat_avalara - (this.discount || 0) - (this.credit || 0) + (this.fdp || 0) - (this.fdpoffered || 0)),
       table_tax_value: this.formatOutputNumber(this.vat_avalara),
